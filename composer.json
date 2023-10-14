@@ -1,0 +1,20 @@
+{
+    "name": "sksso/sdklrvlsso",
+    "description": "SDK SSO Smartkampung Banyuwangi",
+    "version": "1.1",
+    "autoload": {
+        "psr-4": {
+            "sksso\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kominfo"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "guzzlehttp/guzzle": "^7.0",
+        "ext-openssl": "*"
+    }
+}
