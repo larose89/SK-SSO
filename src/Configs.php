@@ -108,8 +108,8 @@ class Configs {
     public function setEnv($aliasID, $secretKeyBody, $secretKeyUrl) {
 		// https://sso.banyuwangikab.go.id/
 		$data = [
-			'SSO_HOST' => 'http://localhost:3000/',
-			'REDIRECT_LOGIN_PAGE' => 'http://localhost:3000/user/login/0?as='.$aliasID,
+			'SSO_HOST' => 'https://sso.banyuwangikab.go.id/',
+			'REDIRECT_LOGIN_PAGE' => 'https://sso.banyuwangikab.go.id/user/login/0?as='.$aliasID,
 			'SECRET_KEY_BODY' => $secretKeyBody,
 			'SECRET_KEY_URL' => $secretKeyUrl,
 			'ALIAS_ID' => $aliasID
