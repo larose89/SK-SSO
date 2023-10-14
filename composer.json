@@ -2,6 +2,7 @@
     "name": "sksso/sdklrvlsso",
     "description": "SDK SSO Smartkampung Banyuwangi",
     "version": "1.0.1",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "sksso\\": "src/"
