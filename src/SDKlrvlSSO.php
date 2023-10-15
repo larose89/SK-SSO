@@ -149,7 +149,7 @@ class SDKlrvlSSO {
             $dataSess["token_created_sso"] = $dataUsers["token_created_sso"];
             $dataSess["token_expired_sso"] = $dataUsers["token_expired_sso"];
 		    $_SESSION["sksso_sdk_sess"]['sesi_sso_data'] = $dataSess;
-            return true;
+            return $dataUsers;
         }
         else
         {
@@ -158,7 +158,7 @@ class SDKlrvlSSO {
             alert ('Auth Tiket tidak Valid');
             window.location.replace('$url');
             </script>";
-            die();
+            return false;
         }
     }
 
@@ -202,6 +202,12 @@ class SDKlrvlSSO {
         return json_decode($response, true);
     }
 
+    public function loginPage()
+    {
+        header('Location: '.$this->config('REDIRECT_LOGIN_PAGE'));
+        exit();
+    }
+    
     public function logout()
     {
         $res = $this->prosesLogout(false);
