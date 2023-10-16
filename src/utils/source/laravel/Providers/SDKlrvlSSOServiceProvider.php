@@ -1,35 +1,23 @@
 <?php
-// Mendeteksi Laravel
-if (file_exists(getcwd() . '/artisan')) {
-    // Ini adalah Laravel
-    try
-    {
-        // Tambahkan provider ke app.php
-        $configApp = file_get_contents(getcwd() . '/config/app.php');
-        if (!strpos($configApp, 'SDKlrvlSSOServiceProvider::class')) {
-            $providerToAdd = "\n        App\\Providers\\SDKlrvlSSOServiceProvider::class,";
-            $configApp = str_replace("'providers' => [", "'providers' => [" . $providerToAdd, $configApp);
-            file_put_contents(getcwd() . '/config/app.php', $configApp);
-        }
-    } catch (Exception $e) {
-        // Anda bisa memutuskan untuk menampilkan pesan kesalahan atau log kesalahan.
-        echo "Terjadi kesalahan saat menulis ke config/app.php: " . $e->getMessage();
-    }
-    // Salin sdksksso.php ke folder config
-    if (!file_exists(getcwd() . '/app/Providers/SDKlrvlSSOServiceProvider.php')) {
-        copy('src/utils/source/laravel/Providers/SDKlrvlSSOServiceProvider.php', getcwd() . '/app/Providers/SDKlrvlSSOServiceProvider.php');
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use sksso\SDKlrvlSSO;
+
+class SDKlrvlSSOServiceProvider extends ServiceProvider {
+    public function register() {
+        $this->app->singleton(SDKlrvlSSO::class, function ($app) {
+            $sdk = new SDKlrvlSSO();
+            
+            $config = $app['config']['sdksksso'];
+            $sdk->setEnv($config['envir']['ALIAS_ID'], $config['envir']['SECRET_KEY_BODY'], $config['envir']['SECRET_KEY_URL']);
+            $sdk->setDbConfig($config['DB']['HOST'], $config['DB']['USER'], $config['DB']['PASS'], $config['DB']['DB_NAME']);
+            $sdk->syncDbTable($config['tableSync']);
+            return $sdk;
+        });
     }
 
-    // Salin sdksksso.php ke folder config
-    if (!file_exists(getcwd() . '/config/sdksksso.php')) {
-        copy('src/utils/config/sdksksso.php', getcwd() . '/config/sdksksso.php');
+    public function boot() {
+        // Anda bisa menambahkan penerbitan aset, migrasi, dll di sini jika diperlukan
     }
-}
-// Mendeteksi CodeIgniter
-if (is_dir(getcwd() .'/application') && is_dir(getcwd() .'/system') && file_exists(getcwd() .'/index.php')) {
-    // // Mencari string khas CodeIgniter dalam file index.php
-    // $content = file_get_contents('index.php');
-    // if (strpos($content, '$application_folder = \'application\';') !== false) {
-    //     return 'CodeIgniter';
-    // }
 }
