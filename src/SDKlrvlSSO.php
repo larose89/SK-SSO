@@ -118,7 +118,8 @@ class SDKlrvlSSO {
         $resp['pesan']['status'] = 'sukses';
         $resp['pesan']['keterangan'] = 'Data credential diterima';
         $resp['data'] = null;
-        return json_encode($resp);
+        echo json_encode($resp);
+        return;
     }
 
     public function cekTiket($param) {
