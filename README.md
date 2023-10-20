@@ -1,4 +1,4 @@
-![composer testing](https://github.com/larose89/SK-SSO/actions/workflows/php.yml//badge.svg)
+[![PHP Composer](https://github.com/larose89/SK-SSO/actions/workflows/php.yml/badge.svg)](https://github.com/larose89/SK-SSO/actions/workflows/php.yml)
 # Dokumentasi SDK SSO Smartkampung untuk Web PHP dengan DB MySQL
 
 ## 1.	Deskripsi
