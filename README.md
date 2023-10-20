@@ -54,7 +54,7 @@ use sksso\SDKlrvlSSO;
 
 Masukkan value dari parameter environment diatas kedalam fungsi **_setEnv()_** yang anda letakkan di controller, sebelumnya anda harus menginisialisasikan kode ini **_$this->sdkSSO = new SDKlrvlSSO()_** di bagian atas kode, misalkan dimasukkan kedalam method konstruktor, seperti berikut
 
-```
+```HTML+PHP
 private $sdkSSO;
 
 public function __construct() {
@@ -68,13 +68,13 @@ public function __construct() {
 
 ### C. Login Page
 Untuk mengarahkan ke halaman login SSO, gunakan kode berikut
-```
+```HTML+PHP
 $this->sdkSSO->loginPage();
 ```
 
 ### D. Set Konfigurasi Database
 Anda dapat meng set koneksi database MySQL dengan kode berikut
-```
+```HTML+PHP
 $this->sdkSSO->setDbConfig([HOST], [DB_USER], [DB_PASS], [DB_NAME]);
 ```
 
@@ -190,7 +190,7 @@ Jika tabel sudah disinkronisasikan maka rubah data tabel diatas ke bentuk array 
 - **field_table**_(isikan dengan data array dari data tabel sinkronisasi data diatas)_
 
 berikut contoh data arraynya
-```
+```HTML+PHP
 $dataTable = 
         [
             "nama_table" => "users",
@@ -209,12 +209,12 @@ $dataTable =
         ];
 ```
 Masukkan data array diatas kedalam fungsi berikut
-```
+```HTML+PHP
 $this->sdkSSO->syncDbTable($dataTable);
 ```
 
 Berikut kutipan gabungan kode script dari tahapan-tahapan diatas
-```
+```HTML+PHP
 use sksso\SDKlrvlSSO;
 
 class NamaController extends Controller
@@ -249,7 +249,7 @@ public function __construct() {
 ## 5. Penggunaan SDK
 ### A. Ekstrak Data Kredensial
 Buatlah method di controller untuk menerima dan meng ekstrak data **_POST** kredensial yang dikirim dari server SSO. Berikut contoh kodenya
-```
+```HTML+PHP
     public function ekstrakData(){
         $data = file_get_contents('php://input');
         
@@ -260,7 +260,7 @@ Beritahukan ke admin SSO, url endpoint dari method diatas, supaya dapat diakses 
 
 ### B. Cek Validasi Tiket
 Buatlah method di controller untuk menerima data **_GET** tiket yang dikirim dari server SSO. Berikut contoh kodenya
-```
+```HTML+PHP
     public function login(Request $request, $param){
         $dataUsers = $this->sdkSSO->cekTiket($param);
         if($dataUsers) //output data kredensial pengguna format array 
@@ -275,6 +275,6 @@ Dari kode script diatas untuk baris ini _**Auth::loginUsingId($dataUsers['id']);
 
 ### C. Logout
 Berikut merupakan kode script untuk perintah logout user
-```
+```HTML+PHP
  $this->sdkSSO->logout();
 ```
